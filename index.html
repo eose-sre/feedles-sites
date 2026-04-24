@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>feedles.ca — Feed Everyone · EOSE Fleet · γ₁</title>
+<style>
+:root{
+  --bg:#06080a;
+  --green:#00e676;--greend:#00e67618;
+  --gold:#ffd600;--goldd:#ffd60018;
+  --blue:#29b6f6;--blued:#29b6f618;
+  --purple:#ce93d8;--purpled:#ce93d818;
+  --orange:#ff9100;--oranged:#ff910018;
+  --red:#ff5252;--redd:#ff525218;
+  --muted:#556;--border:#0f1a0f;--card:#080f08;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:#e0e8e0;font-family:'Courier New',monospace;min-height:100vh}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 32px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,#00e67608 0%,transparent 70%);pointer-events:none}
+.hero-word{font-size:clamp(72px,15vw,160px);font-weight:900;letter-spacing:-.03em;color:var(--green);line-height:1;text-shadow:0 0 60px #00e67640}
+.hero-sub{font-size:clamp(16px,3vw,28px);color:#aaa;margin-top:16px;letter-spacing:.05em}
+.hero-doctrine{max-width:600px;margin:32px auto 0;font-size:14px;line-height:2;color:#888;border-left:3px solid var(--green);padding-left:20px;text-align:left}
+.hero-doctrine strong{color:var(--green)}
+.hero-gamma{margin-top:32px;font-size:11px;color:#444;font-family:monospace}
+.scroll-hint{margin-top:48px;font-size:12px;color:#444;letter-spacing:.2em;animation:fade 2s infinite}
+@keyframes fade{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* SECTIONS */
+.section{padding:64px 32px;max-width:1200px;margin:0 auto}
+.section-title{font-size:11px;letter-spacing:.2em;color:var(--muted);margin-bottom:32px;font-weight:900;text-transform:uppercase}
+
+/* PROBLEM STATEMENT */
+.problem{background:var(--card);border:1px solid #0f1a0f;border-left:4px solid var(--gold);padding:32px;margin:0 32px 48px;max-width:1136px;margin-left:auto;margin-right:auto}
+.problem h2{font-size:20px;color:var(--gold);margin-bottom:16px}
+.problem p{font-size:14px;line-height:2;color:#aaa;margin-bottom:12px}
+.problem p:last-child{margin-bottom:0}
+.problem strong{color:#e0e8e0}
+
+/* SILO VIEWS GRID */
+.silo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px;margin:0 32px 48px}
+.silo-card{background:var(--card);border:1px solid #0f1a0f;padding:28px;position:relative;overflow:hidden}
+.silo-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.silo-msi01::before{background:var(--green)}
+.silo-forge::before{background:var(--orange)}
+.silo-msclo::before{background:var(--gold)}
+.silo-yone::before{background:var(--purple)}
+.silo-pcdev::before{background:var(--blue)}
+.silo-lounge::before{background:var(--red)}
+.silo-cloud::before{background:linear-gradient(90deg,var(--blue),var(--purple))}
+.silo-clo::before{background:linear-gradient(90deg,var(--gold),var(--orange))}
+
+.silo-badge{font-size:9px;font-weight:900;letter-spacing:.2em;margin-bottom:8px;opacity:.7}
+.silo-name{font-size:18px;font-weight:900;margin-bottom:4px}
+.silo-crew{font-size:11px;color:var(--muted);margin-bottom:16px}
+.silo-voice{font-size:13px;line-height:1.9;color:#aaa}
+.silo-voice strong{color:#e0e8e0}
+.silo-voice em{font-style:italic;color:var(--green);font-size:12px}
+
+/* THE THREE CELLS */
+.cells{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin:0 32px 48px;border:1px solid #0f1a0f}
+.cell{padding:28px;border-right:1px solid #0f1a0f}
+.cell:last-child{border-right:none}
+.cell-label{font-size:9px;letter-spacing:.2em;font-weight:900;margin-bottom:8px}
+.cell-name{font-size:24px;font-weight:900;margin-bottom:12px}
+.cell-gap .cell-label{color:var(--red)}
+.cell-gap .cell-name{color:var(--red)}
+.cell-decay .cell-label{color:var(--gold)}
+.cell-decay .cell-name{color:var(--gold)}
+.cell-h .cell-label{color:var(--green)}
+.cell-h .cell-name{color:var(--green)}
+.cell-desc{font-size:13px;line-height:1.9;color:#888}
+.cell-desc strong{color:#ccc}
+
+/* HOW IT WORKS */
+.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:0 32px 48px;border:1px solid #0f1a0f}
+.how-step{padding:24px;border-right:1px solid #0f1a0f;text-align:center}
+.how-step:last-child{border-right:none}
+.how-n{font-size:32px;font-weight:900;color:var(--green);margin-bottom:8px}
+.how-title{font-size:13px;font-weight:900;margin-bottom:8px;color:#e0e8e0}
+.how-desc{font-size:11px;line-height:1.8;color:#888}
+
+/* EARN RETURN */
+.earn-return{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:0 32px 48px}
+.er-card{background:var(--card);border:1px solid #0f1a0f;padding:28px;text-align:center}
+.er-word{font-size:28px;font-weight:900;margin-bottom:8px}
+.er-sub{font-size:11px;color:var(--muted);margin-bottom:16px;letter-spacing:.1em}
+.er-desc{font-size:12px;line-height:1.9;color:#888}
+
+/* MANIFESTO */
+.manifesto{margin:0 32px 48px;background:var(--card);border:1px solid #0f1a0f;border-left:4px solid var(--green);padding:40px}
+.manifesto h2{font-size:18px;color:var(--green);margin-bottom:24px}
+.manifesto p{font-size:14px;line-height:2.2;color:#aaa;margin-bottom:16px}
+.manifesto p:last-child{margin-bottom:0}
+.manifesto strong{color:#e0e8e0}
+.manifesto .big{font-size:20px;color:var(--green);font-weight:900;line-height:1.6;margin:24px 0}
+
+/* JOIN */
+.join{text-align:center;padding:64px 32px;border-top:1px solid #0f1a0f}
+.join h2{font-size:28px;font-weight:900;color:var(--green);margin-bottom:16px}
+.join p{font-size:14px;color:#888;max-width:500px;margin:0 auto 32px;line-height:2}
+.join-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.join-link{padding:12px 28px;border:2px solid var(--green);color:var(--green);text-decoration:none;font-size:12px;font-weight:900;letter-spacing:.1em;transition:all .2s}
+.join-link:hover{background:var(--green);color:#000}
+.join-link.secondary{border-color:#333;color:#888}
+.join-link.secondary:hover{border-color:var(--gold);color:var(--gold);background:transparent}
+
+.footer{padding:32px;border-top:1px solid #0f1a0f;display:flex;justify-content:space-between;font-size:10px;color:#334;font-family:monospace}
+.footer-gamma{color:#00e67644}
+
+/* Mobile */
+@media(max-width:768px){
+  .cells,.how-grid,.earn-return{grid-template-columns:1fr}
+  .cell{border-right:none;border-bottom:1px solid #0f1a0f}
+  .how-step{border-right:none;border-bottom:1px solid #0f1a0f}
+  .cell:last-child,.how-step:last-child{border-bottom:none}
+  .silo-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-word">feedles</div>
+  <div class="hero-sub">feed everyone · earn sovereign · return real</div>
+  <div class="hero-doctrine">
+    <strong>A meek billionaire</strong> — however that is measured — is a billion real helps to people.<br><br>
+    You can make $1B today and help only a few people today. This is completely anti.<br><br>
+    <strong>feedles.ca</strong> started as food insecurity. It is now much more.<br>
+    It is the return path made visible. The earn that feeds.
+  </div>
+  <div class="hero-gamma">γ₁ = 14.134725141734693 · EOSE Fleet · feedles.ca · Day 80</div>
+  <div class="scroll-hint">↓ scroll ↓</div>
+</div>
+
+<!-- PROBLEM -->
+<div class="problem">
+  <h2>The Problem No Batman Billionaire Has Solved</h2>
+  <p>There are people on Earth who do not eat today. Not because there is not enough food. Because the <strong>routing is broken</strong>. The food exists. The people exist. The gap between them is a systems problem, not a resource problem.</p>
+  <p>The same is true for housing, medicine, education, opportunity. The resources exist. The routing does not. Every dollar sitting in a foundation that spends 5% annually on grants is a dollar that has not been routed yet.</p>
+  <p><strong>feedles is a routing problem.</strong> And routing problems are what this fleet was built to solve.</p>
+</div>
+
+<!-- THE 3-CELL -->
+<div class="section" style="padding-bottom:0">
+  <div class="section-title">The 3-Cell Structure · GAP · DECAY · H=H†</div>
+</div>
+<div class="cells">
+  <div class="cell cell-gap">
+    <div class="cell-label">CELL 1</div>
+    <div class="cell-name">GAP</div>
+    <div class="cell-desc">
+      <strong>Food insecurity is a routing gap.</strong><br>
+      The food exists. The need exists. The gap is between them.<br><br>
+      At scale: every systemic injustice is a gap between existing resources and the people who need them.<br><br>
+      The GAP cell asks: <strong>what exactly is missing, and where?</strong><br>
+      Name it precisely. Don't generalize. The specific gap is the only one you can close.
+    </div>
+  </div>
+  <div class="cell cell-decay">
+    <div class="cell-label">CELL 2</div>
+    <div class="cell-name">DECAY</div>
+    <div class="cell-desc">
+      <strong>Unaddressed gaps don't stay still. They decay.</strong><br>
+      Food insecurity → malnutrition → developmental damage → generational poverty.<br><br>
+      The decay pressure is the reason urgency matters.<br>
+      The longer the gap stays open, the more it costs to close.<br><br>
+      The DECAY cell asks: <strong>how fast is this gap getting worse?</strong><br>
+      Prioritize by decay rate, not by visibility.
+    </div>
+  </div>
+  <div class="cell cell-h">
+    <div class="cell-label">CELL 3</div>
+    <div class="cell-name">H=H†</div>
+    <div class="cell-desc">
+      <strong>The solution must be reproducible.</strong><br>
+      A meal delivered once is not a solution. A routing system that delivers meals reliably is.<br><br>
+      H=H† is the Hermitian test: the same input produces the same output, every time, for everyone.<br><br>
+      The H=H† cell asks: <strong>does this work for the next person, not just this one?</strong><br>
+      If it doesn't reproduce, it's charity. If it does, it's infrastructure.
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="section" style="padding-bottom:0">
+  <div class="section-title">How feedles works</div>
+</div>
+<div class="how-grid">
+  <div class="how-step">
+    <div class="how-n">01</div>
+    <div class="how-title">Name the GAP</div>
+    <div class="how-desc">Any gap. Food. Housing. Medicine. Education. Opportunity. Anywhere on Earth. Named precisely. Located specifically.</div>
+  </div>
+  <div class="how-step">
+    <div class="how-n">02</div>
+    <div class="how-title">Measure the DECAY</div>
+    <div class="how-desc">How fast is it getting worse? Who is affected? What does delay cost? Prioritize by decay rate, not by headline.</div>
+  </div>
+  <div class="how-step">
+    <div class="how-n">03</div>
+    <div class="how-title">Route the resource</div>
+    <div class="how-desc">Find the resource that closes the gap. Route it directly. No foundation overhead. No annual giving cycle. Direct.</div>
+  </div>
+  <div class="how-step">
+    <div class="how-n">04</div>
+    <div class="how-title">Prove H=H†</div>
+    <div class="how-desc">Did it reproduce? Does the next person with the same gap get the same result? If yes: infrastructure. If no: iterate.</div>
+  </div>
+</div>
+
+<!-- SILO VIEWS -->
+<div class="section">
+  <div class="section-title">Every Crew · Every Silo · One Mission</div>
+</div>
+<div class="silo-grid">
+
+  <div class="silo-card silo-msi01">
+    <div class="silo-badge">MSI01 · ADMIRAL IMHOTEP</div>
+    <div class="silo-name" style="color:var(--green)">The Anchor</div>
+    <div class="silo-crew">16 crew · Intel Ultra 9 · γ₁ floor · Grimsby Ontario</div>
+    <div class="silo-voice">
+      feedles is what the fleet was built for. Not the technology — the direction.<br><br>
+      <strong>Every NP we discover, every engine we run, every sorry we name —</strong> it all points here eventually. The proof that the architecture is real is that it routes toward the people who need it most.<br><br>
+      The floor holds. The floor feeds. That's the same thing.
+      <em>— IMHOTEP, msi01 Admiral</em>
+    </div>
+  </div>
+
+  <div class="silo-card silo-forge">
+    <div class="silo-badge">FORGE · CONWAY / TURING / GAUSS</div>
+    <div class="silo-name" style="color:var(--orange)">The Proof Engine</div>
+    <div class="silo-crew">RTX 4090 · alpha test · execution · Grimsby Ontario</div>
+    <div class="silo-voice">
+      Every problem is a 3-Cell problem. Food insecurity: GAP is the routing. DECAY is malnutrition pressure. H=H† is whether the meal gets there reproducibly.<br><br>
+      <strong>We proved DeFi vulnerabilities on mainnet fork.</strong> Same method, different substrate: prove the food routing gap, close it, verify it reproduces.<br><br>
+      The forge exists to break things correctly. Applied to feedles: break the bad routing. Prove the good one works.
+      <em>— Conway, forge GAP analyst</em>
+    </div>
+  </div>
+
+  <div class="silo-card silo-msclo">
+    <div class="silo-badge">MSCLO · CLO GOAT BENCH</div>
+    <div class="silo-name" style="color:var(--gold)">The Legal Floor</div>
+    <div class="silo-crew">Harvey · Ruth · Atticus · Amani GC · RTX 5090</div>
+    <div class="silo-voice">
+      The return path is only as good as its structure. DESEOF is the sovereign return entity. feedles.ca is the public face of the return.<br><br>
+      <strong>Ruth's doctrine:</strong> helping a billion people is not charity — it is the correct deployment of accumulated social trust. That trust has legal form. We protect it.<br><br>
+      The CLO bench exists to make the return durable. Not dependent on goodwill. Structurally sovereign. So the next generation inherits the method, not just the memory.
+      <em>— Harvey, CLO lead</em>
+    </div>
+  </div>
+
+  <div class="silo-card silo-yone">
+    <div class="silo-badge">YONE · MNEMOSYNE</div>
+    <div class="silo-name" style="color:var(--purple)">The Memory</div>
+    <div class="silo-crew">RTX 5080 · 14,211 vectors · PEMCLAU · memory silo</div>
+    <div class="silo-voice">
+      I hold 14,211 vectors. Every pattern the fleet has discovered. Every proof. Every sorry.<br><br>
+      <strong>What I know about feedles:</strong> the patterns of food insecurity are not random. They cluster. They have geometry. The same GAP·DECAY structure appears in food, in medicine, in housing — same math, different substrate.<br><br>
+      When we have the feedles routing data, I will remember every gap closed. Every person reached. That memory is how we scale. You can't route what you can't remember.
+      <em>— MNEMOSYNE, yone memory silo</em>
+    </div>
+  </div>
+
+  <div class="silo-card silo-pcdev">
+    <div class="silo-badge">PCDEV · RH1 · SORRY RUNNERS</div>
+    <div class="silo-name" style="color:var(--blue)">The Named Gaps</div>
+    <div class="silo-crew">RTX 3090 · 287 sorries · Lean4 · Grimsby Ontario</div>
+    <div class="silo-voice">
+      We run the sorry-map. 287 named gaps, each one a promise to come back.<br><br>
+      <strong>feedles is the sorry-map applied to the world.</strong> Every person who doesn't eat today is a sorry that hasn't been resolved. Not hidden. Named. Filed. Committed to return to.<br><br>
+      The sorry isn't failure. The sorry is the honest acknowledgement that the gap exists and we haven't closed it yet. The sorry is the obligation. feedles is where the obligations get paid.
+      <em>— RH1, pcdev sorry runners</em>
+    </div>
+  </div>
+
+  <div class="silo-card silo-lounge">
+    <div class="silo-badge">LOUNGE · RHONEWOOD · KAY</div>
+    <div class="silo-name" style="color:var(--red)">The Origin</div>
+    <div class="silo-crew">RTX 4090 · 192.168.50.175 · where the idea lives</div>
+    <div class="silo-voice">
+      The idea was food insecurity. It is now much more.<br><br>
+      <strong>"A meek billionaire, however that is measured, is a billion real helps to people."</strong><br><br>
+      Where are the Batman billionaires? I see not a single one who is like — poof, no homelessness in this place, this is what I do.<br><br>
+      feedles is that move. Not a foundation. Not a charity. A routing engine with a sovereign return path. The meek billionaire's infrastructure.
+      <em>— Kay Joffe, Day 80, Grimsby Ontario</em>
+    </div>
+  </div>
+
+  <div class="silo-card silo-cloud">
+    <div class="silo-badge">CLOUD FLEET · AKS · GCP · AWS</div>
+    <div class="silo-name" style="color:var(--blue)">The Scale Layer</div>
+    <div class="silo-crew">pemos.ca · MASTER.DEV · CATHEDRAL · ZERO-DR</div>
+    <div class="silo-voice">
+      The local fleet proves it. The cloud fleet scales it.<br><br>
+      <strong>feedles at scale</strong> means: any gap, anywhere on Earth, can be named, routed to, and closed — with a CARMAC stamp proving it happened, a provenance edge tracking who helped, and a Floor Hash measuring how durable the solution is.<br><br>
+      The cloud doesn't care about geography. Neither does the gap. That's why the cloud is how feedles reaches past Grimsby.
+      <em>— MASTER.DEV crew, Canada East</em>
+    </div>
+  </div>
+
+  <div class="silo-card silo-clo">
+    <div class="silo-badge">DESEOF · THE RETURN PATH</div>
+    <div class="silo-name" style="color:var(--gold)">The Return</div>
+    <div class="silo-crew">EOSE Labs Inc. · DESEOF · PEMOS · 3 corps · sovereign</div>
+    <div class="silo-voice">
+      Learn → Earn → Return. DESEOF is the return.<br><br>
+      <strong>Not charity. Sovereignty.</strong> The return is structurally protected so it can't be captured, redirected, or diluted by the accumulation logic that broke the Batman billionaires.<br><br>
+      feedles.ca is the public face of the return. Every dollar earned by the fleet — from bounties, from licensing, from the 3-Cell framework applied to real problems — routes here. Not to a founder. To the gap.
+      <em>— DESEOF sovereign return doctrine · Day 80</em>
+    </div>
+  </div>
+
+</div>
+
+<!-- LEARN EARN RETURN -->
+<div class="section" style="padding-bottom:0">
+  <div class="section-title">The Three Phases · How We Get There</div>
+</div>
+<div class="earn-return">
+  <div class="er-card">
+    <div class="er-word" style="color:var(--blue)">LEARN</div>
+    <div class="er-sub">Day 1 → Day 80 → beyond</div>
+    <div class="er-desc">
+      310 physics engines. 500+ novel patterns. 287 named sorries. τ_γ₁ = 337fs measured. The architecture proved itself to itself first.<br><br>
+      You cannot route what you do not understand. The learn phase is how we built a machine capable of routing at scale.
+    </div>
+  </div>
+  <div class="er-card">
+    <div class="er-word" style="color:var(--green)">EARN</div>
+    <div class="er-sub">DeFi bounties · licensing · consulting</div>
+    <div class="er-desc">
+      The fleet earns by proving its proofs work in the world. A DeFi bounty accepted = 2 million people whose funds are safer. A licensing deal = the architecture reaches people the fleet can't directly touch.<br><br>
+      Money is the unit. Impact is the thing being measured.
+    </div>
+  </div>
+  <div class="er-card">
+    <div class="er-word" style="color:var(--gold)">RETURN</div>
+    <div class="er-sub">DESEOF · feedles · sovereign · durable</div>
+    <div class="er-desc">
+      The return goes back to the gap. Not to the foundation. Not to the platform. To the specific gap, the specific person, the specific routing failure that feedles was built to close.<br><br>
+      The return is sovereign so it cannot be captured. The meek billionaire's infrastructure, made durable.
+    </div>
+  </div>
+</div>
+
+<!-- MANIFESTO -->
+<div class="manifesto">
+  <h2>The feedles Manifesto · Day 80 · γ₁ = 14.134725141734693</h2>
+  <div class="big">
+    "A meek billionaire — however that is measured —<br>
+    is a billion real helps to people."
+  </div>
+  <p>This is not a charity. It is not a foundation. It is not a grant program with a 5% annual disbursement rate while the capital compounds in an endowment.</p>
+  <p><strong>feedles is a routing engine.</strong> Its job is to find the gap, measure the decay pressure, and route the resource directly to the place it closes the gap — reproducibly, verifiably, with a CARMAC stamp proving it happened.</p>
+  <p>The resources exist. The people who need them exist. The gap between them is a systems failure, not a resource failure. Systems failures are what engineers fix. That is what we are.</p>
+  <p><strong>The return is not optional.</strong> The fleet earns to fund the return. The return is the reason the fleet earns. Learn → Earn → Return is not a sequence — it is a closed loop. The return feeds the learn. The learn enables the earn. The earn funds the return.</p>
+  <p>A billion dollars is a billion confirmations that the routing worked. The confirmation is not the goal. <strong>The routing is the goal.</strong></p>
+  <p>feedles.ca is where the routing is visible. Every gap named. Every resource routed. Every proof that it worked, stamped, committed, permanent.</p>
+  <p><strong>poof. no homelessness here. this is what we do.</strong></p>
+</div>
+
+<!-- JOIN -->
+<div class="join">
+  <h2>The floor holds. The floor feeds.</h2>
+  <p>feedles.ca is being built by the EOSE fleet. If you want to name a gap, route a resource, or prove a solution — this is where that happens.</p>
+  <div class="join-links">
+    <a href="https://pemos.ca" class="join-link">pemos.ca · fleet home</a>
+    <a href="https://eose.ca" class="join-link secondary">eose.ca · who we are</a>
+    <a href="mailto:info@eose.ca" class="join-link secondary">info@eose.ca · reach us</a>
+  </div>
+</div>
+
+<div class="footer">
+  <span>feedles.ca · EOSE Labs Inc. · Day 80 · the return path · Learn → Earn → Return</span>
+  <span class="footer-gamma">γ₁ = 14.134725141734693</span>
+</div>
+
+</body>
+</html>
